@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity Spa & Barber — Nairobi's Premier Wellness Sanctuary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e8e4dc;
+            --bg-warm: #ddd8ce;
+            --bg-section: #d5cfc4;
+            --bg-dark: #1c1a17;
+            --bg-darker: #141311;
+            --text: #2c2925;
+            --text-secondary: #6b655b;
+            --text-muted: #8a847a;
+            --text-faint: #a39d93;
+            --accent: #a08b6a;
+            --accent-soft: #b8a88a;
+            --accent-gold: #c4b896;
+            --border: rgba(44,41,37,0.10);
+            --border-light: rgba(44,41,37,0.06);
+            --border-hover: rgba(44,41,37,0.18);
+            --white: #f0ece4;
+            --card-bg: #e2ddd4;
+            --card-hover: #eae5db;
+            --success: #7a9e6e;
+            --whatsapp: #25d366;
+            --transition-slow: 1s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-medium: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .font-display {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .font-display em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        ::selection {
+            background: var(--accent-soft);
+            color: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 32px 48px;
+            transition: all var(--transition-medium);
+        }
+        .nav.scrolled {
+            background: rgba(232,228,220,0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 48px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .nav-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+        .nav-logo span {
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width var(--transition-fast);
+        }
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-cta {
+            background: var(--text);
+            color: var(--white);
+            padding: 14px 32px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--text);
+        }
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--text);
+        }
+        .nav-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-medium);
+        }
+        .mobile-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .mobile-menu a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-medium);
+        }
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu a:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-menu a:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-menu-close {
+            position: absolute;
+            top: 32px; right: 32px;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 160px 80px 80px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        .hero-eyebrow-line {
+            width: 48px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .hero-eyebrow-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .hero h1 {
+            font-size: clamp(3.5rem, 6vw, 7rem);
+            margin-bottom: 32px;
+            max-width: 600px;
+            color: var(--text);
+        }
+        .hero h1 em {
+            color: var(--accent);
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: var(--text);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid var(--text);
+            transition: all var(--transition-fast);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text);
+        }
+        .btn-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        .btn-text::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 100%; height: 1px;
+            background: var(--text);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-fast);
+        }
+        .btn-text:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.75) contrast(0.95) brightness(0.9);
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
+        .hero-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--bg) 0%, transparent 30%);
+        }
+        .hero-badge {
+            position: absolute;
+            bottom: 48px;
+            left: 48px;
+            background: var(--card-bg);
+            padding: 20px 28px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 3;
+        }
+        .hero-badge-rating {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .hero-badge-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .hero-badge-text strong {
+            display: block;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 160px 48px;
+        }
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* Marquee */
+        .marquee {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background: var(--bg-warm);
+        }
+        .marquee-track {
+            display: flex;
+            gap: 80px;
+            animation: marquee 35s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            white-space: nowrap;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .marquee-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Philosophy */
+        .philosophy {
+            background: var(--bg);
+        }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 120px;
+            align-items: start;
+        }
+        .philosophy-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+        }
+        .philosophy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.8) contrast(0.95);
+            transition: transform 8s ease;
+        }
+        .philosophy-image:hover img {
+            transform: scale(1.03);
+        }
+        .philosophy-image::after {
+            content: '';
+            position: absolute;
+            inset: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            pointer-events: none;
+        }
+        .philosophy-content {
+            padding-top: 80px;
+        }
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+        .section-label::before {
+            content: '';
+            width: 48px;
+            height: 1px;
+            background: var(--accent);
+        }
+        .philosophy h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 40px;
+            max-width: 500px;
+            color: var(--text);
+        }
+        .philosophy-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+        .philosophy-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Services — Bento Grid with VISIBLE hover images */
+        .services {
+            background: var(--bg-warm);
+        }
+        .services-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 100px;
+        }
+        .services-header .section-label {
+            justify-content: center;
+        }
+        .services-header .section-label::before {
+            display: none;
+        }
+        .services-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+        .services-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .services-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(320px, auto);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+        .bento-card {
+            background: var(--card-bg);
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+        .bento-card:hover {
+            background: var(--card-hover);
+        }
+        .bento-card.featured {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
+        .bento-card.wide {
+            grid-column: span 6;
+        }
+        .bento-card.tall {
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+        .bento-card.standard {
+            grid-column: span 4;
+        }
+        .bento-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+        .bento-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+            font-weight: 400;
+            color: var(--text);
+        }
+        .bento-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+        .bento-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+            margin-top: auto;
+        }
+        .bento-duration {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .bento-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+        /* VISIBLE hover images on bento cards */
+        .bento-image {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.35;
+            transition: opacity var(--transition-medium);
+        }
+        .bento-card:hover .bento-image {
+            opacity: 0.8;
+        }
+        .bento-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.6) contrast(0.9);
+        }
+        .bento-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Experience — Dark section */
+        .experience {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 160px 48px;
+        }
+        .experience-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+        .experience-header .section-label {
+            color: var(--accent-gold);
+            justify-content: center;
+        }
+        .experience-header .section-label::before {
+            background: var(--accent-gold);
+        }
+        .experience-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        .experience-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(240,236,228,0.06);
+            border: 1px solid rgba(240,236,228,0.06);
+        }
+        .exp-item {
+            background: var(--bg-dark);
+            padding: 56px 40px;
+            text-align: center;
+            transition: all var(--transition-medium);
+        }
+        .exp-item:hover {
+            background: rgba(240,236,228,0.03);
+        }
+        .exp-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 28px;
+            border: 1px solid rgba(240,236,228,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-medium);
+        }
+        .exp-item:hover .exp-icon {
+            border-color: var(--accent-gold);
+            background: rgba(196,184,150,0.1);
+        }
+        .exp-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent-gold);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .exp-item h4 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .exp-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery {
+            background: var(--bg);
+            padding: 160px 0;
+        }
+        .gallery-header {
+            text-align: center;
+            padding: 0 48px;
+            margin-bottom: 80px;
+        }
+        .gallery-header .section-label {
+            justify-content: center;
+        }
+        .gallery-header .section-label::before {
+            display: none;
+        }
+        .gallery-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 500px 400px;
+            gap: 1px;
+            background: var(--border);
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item:nth-child(1) {
+            grid-row: span 2;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+            object-fit: cover;
+            filter: saturate(0.75) contrast(0.95);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.06);
+            filter: saturate(0.85);
+            opacity: 0.8;
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 48px;
+            background: linear-gradient(to top, rgba(28,26,23,0.85) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        .gallery-caption h4 {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 8px;
+            transform: translateY(16px);
+            transition: transform var(--transition-medium);
+        }
+        .gallery-item:hover .gallery-caption h4 {
+            transform: translateY(0);
+        }
+        .gallery-caption p {
+            font-size: 0.85rem;
+            color: var(--text-faint);
+            transform: translateY(16px);
+            transition: transform var(--transition-medium) 0.1s;
+        }
+        .gallery-item:hover .gallery-caption p {
+            transform: translateY(0);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-warm);
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+        .testimonials-header .section-label {
+            justify-content: center;
+        }
+        .testimonials-header .section-label::before {
+            display: none;
+        }
+        .testimonials-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 56px 48px;
+            position: relative;
+            transition: all var(--transition-medium);
+        }
+        .testimonial-card:hover {
+            border-color: var(--border-hover);
+            background: var(--card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(44,41,37,0.06);
+        }
+        .testimonial-stars {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 32px;
+        }
+        .testimonial-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent-gold);
+        }
+        .testimonial-quote-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.15;
+            line-height: 1;
+            position: absolute;
+            top: 24px;
+            right: 32px;
+        }
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+        }
+        .author-initials {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .author-info h5 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .author-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Booking */
+        .booking {
+            background: var(--bg);
+            padding: 160px 48px;
+        }
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .booking-info h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 40px;
+            color: var(--text);
+        }
+        .booking-info > p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 56px;
+            max-width: 480px;
+        }
+        .info-row {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .info-row:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--transition-fast);
+        }
+        .info-row:hover .info-icon {
+            border-color: var(--accent);
+            background: var(--bg-warm);
+        }
+        .info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .info-detail h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+        .info-detail p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        .booking-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 64px 56px;
+            position: sticky;
+            top: 120px;
+        }
+        .booking-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: var(--accent);
+        }
+        .booking-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: var(--text);
+        }
+        .booking-card > p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 48px;
+        }
+        .booking-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 20px;
+            background: var(--whatsapp);
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: all var(--transition-medium);
+        }
+        .booking-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37,211,102,0.2);
+        }
+        .booking-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .booking-btn.secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: none;
+        }
+        .booking-trust {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+        }
+        .booking-trust svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--success);
+            fill: none;
+            stroke-width: 2;
+        }
+        .booking-trust p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 120px 48px 48px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 80px;
+            max-width: 1440px;
+            margin: 0 auto 100px;
+        }
+        .footer-brand .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            max-width: 320px;
+        }
+        .footer-col h4 {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+        .footer-col a {
+            display: block;
+            color: var(--text-faint);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            transition: color var(--transition-fast);
+            width: fit-content;
+            position: relative;
+        }
+        .footer-col a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent-gold);
+            transition: width var(--transition-fast);
+        }
+        .footer-col a:hover {
+            color: var(--white);
+        }
+        .footer-col a:hover::after {
+            width: 100%;
+        }
+        .footer-contact p {
+            color: var(--text-faint);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .footer-contact .phone {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin: 16px 0 8px;
+        }
+        .footer-bottom {
+            max-width: 1440px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(240,236,228,0.08);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(240,236,228,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-faint);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        .footer-social a:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(196,184,150,0.1);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-bento .bento-card.featured { grid-column: span 6; }
+            .services-bento .bento-card.tall { grid-column: span 6; grid-row: span 1; }
+            .services-bento .bento-card.standard { grid-column: span 6; }
+            .gallery-masonry { grid-template-columns: 1fr 1fr; grid-template-rows: 400px 300px 300px; }
+            .gallery-item:nth-child(1) { grid-row: span 1; }
+            .booking-grid { gap: 80px; }
+        }
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { padding: 140px 48px 80px; text-align: center; }
+            .hero h1 { max-width: none; }
+            .hero-desc { margin: 0 auto 48px; }
+            .hero-cta-group { justify-content: center; }
+            .hero-image { display: none; }
+            .philosophy-grid { grid-template-columns: 1fr; gap: 60px; }
+            .philosophy-image { max-width: 500px; margin: 0 auto; }
+            .philosophy-content { padding-top: 0; text-align: center; }
+            .philosophy h2 { max-width: none; margin: 0 auto 40px; }
+            .philosophy-text { max-width: none; margin: 0 auto 32px; }
+            .philosophy-stats { justify-content: center; }
+            .experience-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 600px; }
+            .booking-grid { grid-template-columns: 1fr; gap: 60px; }
+            .booking-card { position: static; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 60px; }
+        }
+        @media (max-width: 768px) {
+            .nav { padding: 24px; }
+            .nav.scrolled { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .nav-mobile-btn { display: block; }
+            section { padding: 100px 24px; }
+            .hero-content { padding: 120px 24px 60px; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-badge { left: 24px; bottom: 24px; }
+            .services-bento .bento-card,
+            .services-bento .bento-card.featured,
+            .services-bento .bento-card.wide,
+            .services-bento .bento-card.tall,
+            .services-bento .bento-card.standard { grid-column: span 1; }
+            .experience-grid { grid-template-columns: 1fr; }
+            .gallery-masonry { grid-template-columns: 1fr; grid-template-rows: repeat(5, 300px); }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 24px; }
+            .philosophy-stats { flex-direction: column; gap: 32px; align-items: center; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-cta-group { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-text { width: 100%; justify-content: center; }
+            .bento-card { padding: 32px; }
+            .booking-card { padding: 40px 32px; }
+        }
+    </style></style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Serenity <span>Spa & Barber</span></a>
+            <div class="nav-links">
+                <a href="#philosophy">Philosophy</a>
+                <a href="#services">Services</a>
+                <a href="#experience">Experience</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#stories">Stories</a>
+                <a href="#contact" class="nav-cta">Reserve</a>
+            </div>
+            <button class="nav-mobile-btn" onclick="toggleMenu()" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <line x1="4" y1="8" x2="20" y2="8"/>
+                    <line x1="4" y1="16" x2="20" y2="16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Close">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <a href="#philosophy" onclick="toggleMenu()">Philosophy</a>
+        <a href="#services" onclick="toggleMenu()">Services</a>
+        <a href="#experience" onclick="toggleMenu()">Experience</a>
+        <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+        <a href="#stories" onclick="toggleMenu()">Stories</a>
+        <a href="#contact" onclick="toggleMenu()" style="color: var(--accent);">Reserve</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="hero-eyebrow-line"></span>
+                <span class="hero-eyebrow-text">Nairobi's Premier Wellness Sanctuary</span>
+            </div>
+            <h1 class="font-display">Restore.<br>Groom.<br><em>Transcend.</em></h1>
+            <p class="hero-desc">Where precision barbering meets therapeutic restoration. A space designed for those who understand that self-care is not indulgence — it is discipline.</p>
+            <div class="hero-cta-group">
+                <a href="https://wa.me/254745830509" class="btn-primary" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Reserve Now
+                </a>
+                <a href="#services" class="btn-text">Explore Services →</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-overlay"></div>
+            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1200&auto=format&fit=crop&q=80" alt="Luxury Spa Treatment Room">
+            <div class="hero-badge">
+                <div class="hero-badge-rating">5.0</div>
+                <div class="hero-badge-text">
+                    <strong>Google Rating</strong>
+                    12+ Verified Reviews
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <div class="marquee-item"><span class="marquee-dot"></span> Walk-ins Welcome</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Same-Day Appointments</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Certified Therapists</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Premium Products Only</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Private Treatment Suites</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Master Barbers</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Open Until 8 PM</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Walk-ins Welcome</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Same-Day Appointments</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Certified Therapists</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Premium Products Only</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Private Treatment Suites</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Master Barbers</div>
+            <div class="marquee-item"><span class="marquee-dot"></span> Open Until 8 PM</div>
+        </div>
+    </div>
+
+    <!-- Philosophy -->
+    <section class="philosophy" id="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-image reveal">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&auto=format&fit=crop&q=80" alt="Massage Therapy">
+                </div>
+                <div class="philosophy-content reveal">
+                    <div class="section-label">Our Philosophy</div>
+                    <h2 class="font-display">We believe stillness<br>is the ultimate <em>luxury</em></h2>
+                    <p class="philosophy-text">In a city that never pauses, Serenity exists as a counterpoint — a space where time slows, noise fades, and attention becomes the rarest commodity. Every treatment, every cut, every moment is designed to restore what Nairobi takes away.</p>
+                    <p class="philosophy-text">Our master barbers and certified therapists share one philosophy: precision without rush. Whether you seek the sharp confidence of a fresh fade or the deep release of therapeutic massage, the experience is always unhurried, always intentional.</p>
+                    <div class="philosophy-stats">
+                        <div>
+                            <div class="stat-number">5.0</div>
+                            <div class="stat-label">Google Rating</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">12+</div>
+                            <div class="stat-label">Client Reviews</div>
+                        </div>
+                        <div>
+                            <div class="stat-number">Open</div>
+                            <div class="stat-label">Until 8 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services — Bento Grid -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <div class="section-label">The Menu</div>
+                <h2 class="font-display">Curated for <em>Restoration</em></h2>
+                <p>Every service is a ritual — designed to deliver not just results, but a complete reset of body and mind.</p>
+            </div>
+            <div class="services-bento reveal">
+                <div class="bento-card featured">
+                    <div class="bento-image">
+                        <img src="https://i.pinimg.com/736x/73/3e/58/733e589ce90000e234cf436792697fad.jpg" alt="Haircut">
+                    </div>
+                    <div>
+                        <div class="bento-number">01</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">The Signature Cut</h3>
+                            <p>Precision haircut with hot towel treatment, scalp massage, and expert styling. A ritual of renewal that leaves you sharper than you arrived.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">45 Minutes</span>
+                        <span class="bento-price">KES 500</span>
+                    </div>
+                </div>
+                <div class="bento-card tall">
+                    <div class="bento-image">
+                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&auto=format&fit=crop&q=80" alt="Massage">
+                    </div>
+                    <div>
+                        <div class="bento-number">02</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">Deep Tissue Massage</h3>
+                            <p>Targeted therapeutic pressure to release chronic tension. Our therapists read your body like a map.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">60 Minutes</span>
+                        <span class="bento-price">KES 2,000</span>
+                    </div>
+                </div>
+                <div class="bento-card standard">
+                    <div class="bento-image">
+                        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&auto=format&fit=crop&q=80" alt="Beard">
+                    </div>
+                    <div>
+                        <div class="bento-number">03</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">Beard Sculpting</h3>
+                            <p>Artisan beard shaping with straight razor line-up and hot oil conditioning.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">30 Minutes</span>
+                        <span class="bento-price">KES 350</span>
+                    </div>
+                </div>
+                <div class="bento-card standard">
+                    <div class="bento-image">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80" alt="Facial">
+                    </div>
+                    <div>
+                        <div class="bento-number">04</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">Rejuvenating Facial</h3>
+                            <p>Deep cleansing, exfoliation, and hydration therapy using premium botanical extracts.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">50 Minutes</span>
+                        <span class="bento-price">KES 1,200</span>
+                    </div>
+                </div>
+                <div class="bento-card wide">
+                    <div class="bento-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV_qUA4zno0VbFn3H7H8tTzhV3TSoN_BsjOw&s" alt="Shave">
+                    </div>
+                    <div>
+                        <div class="bento-number">05</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">The Royal Shave</h3>
+                            <p>The lost art of the straight razor. Multiple hot towels, premium shaving cream, and aftershave balm for the closest shave of your life. For the man who appreciates tradition.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">40 Minutes</span>
+                        <span class="bento-price">KES 600</span>
+                    </div>
+                </div>
+                <div class="bento-card standard">
+                    <div class="bento-image">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&auto=format&fit=crop&q=80" alt="Full Body">
+                    </div>
+                    <div>
+                        <div class="bento-number">06</div>
+                        <div class="bento-content">
+                            <h3 class="font-display">Full Body Ritual</h3>
+                            <p>Our signature 90-minute journey combining Swedish massage, aromatherapy, and warm stone therapy.</p>
+                        </div>
+                    </div>
+                    <div class="bento-meta">
+                        <span class="bento-duration">90 Minutes</span>
+                        <span class="bento-price">KES 3,500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="experience-header reveal">
+                <div class="section-label">The Experience</div>
+                <h2 class="font-display">Every Detail, <em>Considered</em></h2>
+                <p>We have stripped away the unnecessary so that what remains is purely intentional. Every element exists to deepen your state of calm.</p>
+            </div>
+            <div class="experience-grid reveal">
+                <div class="exp-item">
+                    <div class="exp-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h4>Premium Products</h4>
+                    <p>Only certified organic and dermatologist-tested formulations touch your skin</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    </div>
+                    <h4>Acoustic Wellness</h4>
+                    <p>Soundproofed suites with curated ambient soundscapes for deep relaxation</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+                    <h4>Private Suites</h4>
+                    <p>Fully enclosed treatment rooms ensuring complete privacy and uninterrupted calm</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h4>Master Craftsmen</h4>
+                    <p>Every barber and therapist holds advanced certification with 5+ years experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-header reveal">
+            <div class="section-label">Visual Journey</div>
+            <h2 class="font-display">The <em>Atmosphere</em></h2>
+        </div>
+        <div class="gallery-masonry reveal">
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/564x/fc/02/9d/fc029de10c91e8d36b1a0b342341c90d.jpg" alt="Precision Haircut">
+                <div class="gallery-caption">
+                    <h4 class="font-display">Precision Fade</h4>
+                    <p>Skin fade with textured styling</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=600&auto=format&fit=crop&q=80" alt="Massage Therapy">
+                <div class="gallery-caption">
+                    <h4 class="font-display">Deep Release</h4>
+                    <p>Therapeutic full body massage</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&auto=format&fit=crop&q=80" alt="Beard Grooming">
+                <div class="gallery-caption">
+                    <h4 class="font-display">Beard Artistry</h4>
+                    <p>Sharp line-up and full reshape</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80" alt="Facial Treatment">
+                <div class="gallery-caption">
+                    <h4 class="font-display">Skin Renewal</h4>
+                    <p>Botanical facial therapy</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03rkcGcQ-xL9wj4IGwSXBLVhfiSC1dl4DyA&s" alt="Spa Interior">
+                <div class="gallery-caption">
+                    <h4 class="font-display">The Sanctuary</h4>
+                    <p>Our treatment space</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="stories">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <div class="section-label">Client Stories</div>
+                <h2 class="font-display">Words of <em>Stillness</em></h2>
+            </div>
+            <div class="testimonials-grid reveal">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="testimonial-quote-mark">"</div>
+                    <p class="testimonial-text">I came in for a haircut and ended up booking a massage the same day. The space itself is a retreat — quiet, intentional, and genuinely restorative. This is what self-care should feel like.</p>
+                    <div class="testimonial-author">
+                        <div class="author-initials">JM</div>
+                        <div class="author-info">
+                            <h5>James Mwangi</h5>
+                            <p>Regular Client · 6 visits</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="testimonial-quote-mark">"</div>
+                    <p class="testimonial-text">Finally, a place that understands both grooming and wellness. The hot towel shave was the closest I've ever had, and the facial left my skin glowing for days. Truly premium without the pretension.</p>
+                    <div class="testimonial-author">
+                        <div class="author-initials">DO</div>
+                        <div class="author-info">
+                            <h5>David Ochieng</h5>
+                            <p>First-time Visitor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="testimonial-quote-mark">"</div>
+                    <p class="testimonial-text">The deep tissue massage was transformative. The therapist found tension I didn't even know I was carrying. And the space — so quiet, so intentional. I've booked my next three appointments already.</p>
+                    <div class="testimonial-author">
+                        <div class="author-initials">AK</div>
+                        <div class="author-info">
+                            <h5>Amina Khalid</h5>
+                            <p>Wellness Member</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking" id="contact">
+        <div class="booking-grid">
+            <div class="booking-info reveal">
+                <div class="section-label">Reserve Your Session</div>
+                <h2 class="font-display">Your Moment of<br><em>Stillness</em> Awaits</h2>
+                <p>Walk in today or reserve your preferred time via WhatsApp. Most services accommodate same-day appointments. Your session begins the moment you step through our door.</p>
+
+                <div class="info-row">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>Location</h4>
+                        <p>Serenity Spa & Barber, Nairobi</p>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>Opening Hours</h4>
+                        <p>Open Daily · Closes 8:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+
+                                                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    </div>
+                    <div class="info-detail">
+                        <h4>Direct Line</h4>
+                        <p>0745 830 509</p>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-card reveal">
+                <h3 class="font-display">Instant Reservation</h3>
+                <p>No forms. No waiting. One message and your session is secured.</p>
+                <a href="https://wa.me/254745830509" class="booking-btn" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Reserve on WhatsApp
+                </a>
+                <a href="tel:0745830509" class="booking-btn secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    Call Directly
+                </a>
+                <div class="booking-trust">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    <p>Confirmed in under 2 minutes · No deposit required</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo font-display">Serenity</a>
+                <p>Where precision grooming meets restorative wellness. A sanctuary for those who understand that self-care is not indulgence — it is maintenance.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="#services">The Signature Cut</a>
+                <a href="#services">Deep Tissue Massage</a>
+                <a href="#services">Beard Sculpting</a>
+                <a href="#services">Rejuvenating Facial</a>
+                <a href="#services">The Royal Shave</a>
+                <a href="#services">Full Body Ritual</a>
+            </div>
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <a href="#philosophy">Philosophy</a>
+                <a href="#services">Services</a>
+                <a href="#experience">Experience</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#stories">Stories</a>
+                <a href="#contact">Reserve</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 8px;">Direct Line</p>
+                <p class="phone">0745 830 509</p>
+                <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-top: 16px; line-height: 1.6;">Open Daily<br>Closes 8:00 PM<br>Walk-ins Welcome</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p> 2026 Serenity Spa & Barber. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                </a>
+                <a href="https://wa.me/254745830509" target="_blank" aria-label="WhatsApp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 100;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Parallax Effect on Hero Image
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImg = document.querySelector('.hero-image img');
+            if (heroImg && scrolled < window.innerHeight) {
+                heroImg.style.transform = `scale(1.05) translateY(${scrolled * 0.2}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
